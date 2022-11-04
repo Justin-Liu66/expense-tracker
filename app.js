@@ -33,6 +33,7 @@ app.set('view engine', 'hbs')
 //body-parser
 app.use(bodyParser.urlencoded({ extended: true }))
 
+// 首頁
 app.get('/', (req, res) => {
   Record.find()
     .lean()
@@ -40,10 +41,12 @@ app.get('/', (req, res) => {
     .catch(err => console.log(err))
 })
 
+// 新增頁
 app.get('/records/new', (req, res) => {
   return res.render('new')
 })
 
+// 新增
 app.post('/records', (req, res) => {
   const { name, date, amount, category } = req.body
   return Record.create({
@@ -52,6 +55,31 @@ app.post('/records', (req, res) => {
     amount,
     category
   })
+    .then(() => res.redirect('/'))
+    .catch(err => console.log(err))
+})
+
+// 編輯頁
+app.get('/records/:id/edit', (req, res) => {
+  const id = req.params.id
+  return Record.findById(id)
+    .lean()
+    .then((record) => res.render('edit', { record }))
+    .catch(err => console.log(err))
+})
+
+app.post('/records/:id/edit', (req, res) => {
+  const id = req.params.id
+  const { name, date, amount, category } = req.body
+  return Record.findById(id)
+    //.lean() 加了會出現錯誤!!
+    .then(record => {
+      record.name = name
+      record.date = date
+      record.amount = amount
+      record.category = category
+      return record.save()
+    })
     .then(() => res.redirect('/'))
     .catch(err => console.log(err))
 })
