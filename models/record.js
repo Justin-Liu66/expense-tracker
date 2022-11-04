@@ -3,7 +3,6 @@ const Schema = mongoose.Schema
 const recordSchema = new Schema({
   id: {
     type: Number,
-    required: true
   },
   name: {
     type: String,
@@ -16,6 +15,9 @@ const recordSchema = new Schema({
   amount: {
     type: Number,
     required: true
+  },
+  category: {
+    type: String,
   }
 })
 
