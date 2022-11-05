@@ -10,7 +10,7 @@ const userSchema = new Schema({
     required: true
   },
   password: {
-    type: Number,
+    type: String,
     required: true
   },
   createdAt: {
@@ -19,4 +19,4 @@ const userSchema = new Schema({
   }
 })
 
-module.exports = mongoose.model('Record', recordSchema)
+module.exports = mongoose.model('User', userSchema)
