@@ -1,11 +1,12 @@
 const express = require('express')
-const app = express()
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
-const Record = require('./models/record')
 const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 
+const Record = require('./models/record')
 
+const app = express()
 
 // 非正式環境時, 使用 dotenv
 if (process.env.NODE_ENV !== 'production') {
@@ -30,14 +31,17 @@ db.once('open', () => {
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 // 正式掛載hbs
 app.set('view engine', 'hbs')
-//body-parser
+// body-parser
 app.use(bodyParser.urlencoded({ extended: true }))
+// method-override
+app.use(methodOverride('_method'))
+
 
 // 首頁
 app.get('/', (req, res) => {
   Record.find()
     .lean()
-    .sort({_id: 'asc'})
+    .sort({ _id: 'asc' })
     .then(records => res.render('index', { records }))
     .catch(err => console.log(err))
 })
@@ -70,7 +74,7 @@ app.get('/records/:id/edit', (req, res) => {
 })
 
 //編輯
-app.post('/records/:id/edit', (req, res) => {
+app.put('/records/:id', (req, res) => {
   const id = req.params.id
   const { name, date, amount, category } = req.body
   return Record.findById(id)
@@ -87,7 +91,7 @@ app.post('/records/:id/edit', (req, res) => {
 })
 
 //刪除
-app.post('/records/:id/delete', (req, res) => {
+app.delete('/records/:id', (req, res) => {
   const id = req.params.id
   return Record.findById(id)
     .then(record => record.remove())
