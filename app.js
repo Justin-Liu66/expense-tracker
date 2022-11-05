@@ -37,6 +37,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.get('/', (req, res) => {
   Record.find()
     .lean()
+    .sort({_id: 'asc'})
     .then(records => res.render('index', { records }))
     .catch(err => console.log(err))
 })
@@ -68,6 +69,7 @@ app.get('/records/:id/edit', (req, res) => {
     .catch(err => console.log(err))
 })
 
+//編輯
 app.post('/records/:id/edit', (req, res) => {
   const id = req.params.id
   const { name, date, amount, category } = req.body
@@ -84,8 +86,9 @@ app.post('/records/:id/edit', (req, res) => {
     .catch(err => console.log(err))
 })
 
+//刪除
 app.post('/records/:id/delete', (req, res) => {
-  const id = req. params.id
+  const id = req.params.id
   return Record.findById(id)
     .then(record => record.remove())
     .then(() => res.redirect('/'))
