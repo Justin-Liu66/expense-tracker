@@ -1,7 +1,22 @@
-<form action="/records" method="POST">
-  <input type="text" placeholder="name" name="name">
-  <input type="text" placeholder="date" name="date">
-  <input type="text" placeholder="category" name="category">
-  <input type="text" placeholder="amount" name="amount">
-  <button type="submit">新增支出</button>
+<form class="d-flex flex-column align-items-center mt-5" action="/records" method="POST">
+
+  <div class="mt-2">
+    <h5 style="display: inline; color: green">名稱:</h5>
+    <input type="text" placeholder="name" name="name" style="display: inline; border-radius: 10px">
+  </div>
+  <div class="mt-2">
+    <h5 style="display: inline; color: green">日期:</h5>
+    <input type="text" placeholder="date" name="date" style="display: inline; border-radius: 10px">
+  </div>
+  <div class="mt-2">
+    <h5 style="display: inline; color: green">類別:</h5>
+    <input type="text" placeholder="category" name="category" style="display: inline; border-radius: 10px">
+  </div>
+  <div class="mt-2">
+    <h5 style="display: inline; color: green">金額:</h5>
+    <input type="text" placeholder="amount" name="amount" style="display: inline; border-radius: 10px">
+  </div>
+
+  <button class="btn btn-success mt-3" type="submit">新增支出</button>
+
 </form>
