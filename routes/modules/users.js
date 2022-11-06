@@ -22,17 +22,37 @@ router.get('/register', (req, res) => {
 // 註冊
 router.post('/register', (req, res) => {
   const { name, email, password, confirmPassword } = req.body
+  const errors = []
+  //註冊表單有空白的情況
+  if (!name || !email || !password || !confirmPassword) {
+    errors.push({ message: '所有欄位都是必填!' })
+  }
+  //密碼與確認密碼不相符的情況
+  if (password !== confirmPassword) {
+    errors.push({ message: '密碼與確認密碼不相符!' })
+  }
+  //若上述任一種情況存在，則重新渲染註冊頁並顯示提示
+  if (errors.length) {
+    return res.render('register', {
+      errors,
+      name,
+      email,
+      password,
+      confirmPassword
+    })
+  }
   User.findOne({ email })
     .then(user => {
       if (user) {
-        console.log('User already exists!!')
-        res.render('register', {
+        errors.push({ message: '這個Email已經註冊過了!' })
+        return res.render('register', {
+          errors,
           name,
           email,
           password,
           confirmPassword
         })
-      } else { // 尚未檢查密碼是否一致及空白欄位問題
+      } else {
         User.create({
           name,
           email,
@@ -48,6 +68,7 @@ router.post('/register', (req, res) => {
 // 登出
 router.get('/logout', (req, res) => {
   req.logout()
+  req.flash('success_msg', '您已成功登出!')
   res.redirect('/users/login')
 })
 
