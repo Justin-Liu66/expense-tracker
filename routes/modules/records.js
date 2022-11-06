@@ -10,12 +10,14 @@ router.get('/new', (req, res) => {
 
 // 新增
 router.post('/', (req, res) => {
+  const userId = req.user._id
   const { name, date, amount, category } = req.body
   return Record.create({
     name,
     date,
     amount,
-    category
+    category,
+    userId
   })
     .then(() => res.redirect('/'))
     .catch(err => console.log(err))
@@ -23,8 +25,9 @@ router.post('/', (req, res) => {
 
 // 編輯頁
 router.get('/:id/edit', (req, res) => {
-  const id = req.params.id
-  return Record.findById(id)
+  const userId = req.user._id
+  const _id = req.params.id
+  return Record.findOne({ _id, userId })
     .lean()
     .then((record) => res.render('edit', { record }))
     .catch(err => console.log(err))
@@ -32,9 +35,10 @@ router.get('/:id/edit', (req, res) => {
 
 // 編輯
 router.put('/:id', (req, res) => {
-  const id = req.params.id
+  const userId = req.user._id
+  const _id = req.params.id
   const { name, date, amount, category } = req.body
-  return Record.findById(id)
+  return Record.findOne({ _id, userId })
     //.lean() 加了會出現錯誤!!猜測是因為後面的程序要操作資料庫，因而此時不能.lean()改變資料型態？
     .then(record => {
       record.name = name
@@ -49,8 +53,9 @@ router.put('/:id', (req, res) => {
 
 // 刪除
 router.delete('/:id', (req, res) => {
-  const id = req.params.id
-  return Record.findById(id)
+  const userId = req.user._id
+  const _id = req.params.id
+  return Record.findOne({ _id, userId })
     .then(record => record.remove())
     .then(() => res.redirect('/'))
     .catch(err => console.log(err))
