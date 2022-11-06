@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 
 const routes = require('./routes')
+const usePassport = require('./config/passport')
 require('./config/mongoose')
 
 const app = express()
@@ -13,17 +14,19 @@ const app = express()
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 // 正式掛載hbs
 app.set('view engine', 'hbs')
+
 // session
 app.use(session({
   secret: 'ThisIsMySecret',
   resave: 'false',
   saveUninitialized: true
 }))
-
 // body-parser
 app.use(bodyParser.urlencoded({ extended: true }))
 // method-override
 app.use(methodOverride('_method'))
+// passport
+usePassport(app)
 // router
 app.use(routes)
 
