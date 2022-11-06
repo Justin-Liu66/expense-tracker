@@ -4,7 +4,6 @@ const home = require('./modules/home')
 const records = require('./modules/records')
 const users = require('./modules/users')
 
-
 // 首頁
 router.use('/', home)
 // records
