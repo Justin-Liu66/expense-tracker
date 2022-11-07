@@ -1,4 +1,4 @@
-<form class="d-flex flex-column align-items-center mt-5" action="/records" method="POST">
+<form class="d-flex flex-column align-items-start mt-5" action="/records" method="POST">
 
   <div class="mt-2">
     <h5 style="display: inline; color: green">名稱:</h5>
@@ -10,7 +10,17 @@
   </div>
   <div class="mt-2">
     <h5 style="display: inline; color: green">類別:</h5>
+    <select name="categoryId" id="categoryId">
+      <option disabled selected>請點選</option>
+      <option value="1">家居物業</option>
+      <option value="2">交通出行</option>
+      <option value="3">休閒娛樂</option>
+      <option value="4">餐飲食品</option>
+      <option value="5">其他</option>
+    </select>
+    <!--
     <input type="text" placeholder="category" name="category" style="display: inline; border-radius: 10px">
+    -->
   </div>
   <div class="mt-2">
     <h5 style="display: inline; color: green">金額:</h5>
