@@ -17,7 +17,7 @@ router.post('/', (req, res) => {
     date,
     amount,
     userId,
-    categoryId,  
+    categoryId,
   })
     .then(() => res.redirect('/'))
     .catch(err => console.log(err))
@@ -58,6 +58,26 @@ router.delete('/:id', (req, res) => {
   return Record.findOne({ _id, userId })
     .then(record => record.remove())
     .then(() => res.redirect('/'))
+    .catch(err => console.log(err))
+})
+
+//按種類查看消費記錄
+router.get('/category', (req, res) => {
+  const userId = req.user._id
+  const { categoryId } = req.query
+  //從資料庫找出屬於"該使用者"且符合"指定類別"的消費資料
+  Record.find({ userId, categoryId })
+    .lean()
+    .sort({ _id: 'asc' })
+    .then(records => {
+      //計算總金額(該使用者在該"指定類別"中所支出的金額)
+      let totalAmount = 0
+      records.forEach(record => {
+        totalAmount += record.amount
+      })
+      res.render('index', { records, totalAmount })
+    }
+    )
     .catch(err => console.log(err))
 })
 

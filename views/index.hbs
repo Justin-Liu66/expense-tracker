@@ -1,4 +1,17 @@
-
+<form class="d-flex flex-column align-items-start mt-5" action="/records/category" method="GET">
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      類別
+    </button>
+    <ul class="dropdown-menu">
+      <li><button class="dropdown-item" type="submit" name="categoryId" value="1">家居物業</button></li>
+      <li><button class="dropdown-item" type="submit" name="categoryId" value="2">交通出行</button></li>
+      <li><button class="dropdown-item" type="submit" name="categoryId" value="3">休閒娛樂</button></li>
+      <li><button class="dropdown-item" type="submit" name="categoryId" value="4">餐飲食品</button></li>
+      <li><button class="dropdown-item" type="submit" name="categoryId" value="5">其他</button></li>
+    </ul>
+  </div>
+</form>
 
 <h2>總金額: {{ totalAmount }}元</h2>
 
