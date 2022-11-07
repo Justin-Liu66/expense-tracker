@@ -1,3 +1,8 @@
+// 非正式環境時, 使用 dotenv
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+
 const db = require('../../config/mongoose')
 const Record = require('../record')
 
