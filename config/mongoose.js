@@ -1,9 +1,5 @@
 const mongoose = require('mongoose')
 
-// 非正式環境時, 使用 dotenv
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config()
-}
 // 連線MongoDB
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true, useUnifiedTopology: true
