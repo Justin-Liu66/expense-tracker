@@ -38,6 +38,12 @@ router.put('/:id', (req, res) => {
   const userId = req.user._id
   const _id = req.params.id
   const { name, date, amount, categoryId } = req.body
+  //若有未填欄位則導回編輯頁
+  if (!name || !date || !amount || !categoryId) {
+    req.flash('warning_msg', '所有欄位都是必填!')
+    return res.redirect(`/records/${_id}/edit`)
+  }
+
   return Record.findOne({ _id, userId })
     //.lean() 加了會出現錯誤!!猜測是因為後面的程序要操作資料庫，因而此時不能.lean()改變資料型態？
     .then(record => {
