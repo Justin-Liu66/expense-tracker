@@ -25,15 +25,15 @@ router.get('/register', (req, res) => {
 router.post('/register', (req, res) => {
   const { name, email, password, confirmPassword } = req.body
   const errors = []
-  //註冊表單有空白的情況
+  // 註冊表單有空白的情況
   if (!name || !email || !password || !confirmPassword) {
     errors.push({ message: '所有欄位都是必填!' })
   }
-  //密碼與確認密碼不相符的情況
+  // 密碼與確認密碼不相符的情況
   if (password !== confirmPassword) {
     errors.push({ message: '密碼與確認密碼不相符!' })
   }
-  //若上述任一種情況存在，則重新渲染註冊頁並顯示提示
+  // 若上述任一種情況存在，則重新渲染註冊頁並顯示提示
   if (errors.length) {
     return res.render('register', {
       errors,
