@@ -8,7 +8,15 @@ router.get('/', (req, res) => {
   Record.find({ userId })
     .lean()
     .sort({ _id: 'asc' })
-    .then(records => res.render('index', { records }))
+    .then(records => {
+      //計算總金額(該用戶支出的所有項目)
+      let totalAmount = 0
+      records.forEach(record => {
+        totalAmount += record.amount
+      }) 
+      res.render('index', { records, totalAmount })
+    } 
+      )
     .catch(err => console.log(err))
 })
 
