@@ -28,31 +28,31 @@ const seedUser = [
 const seedRecord = [
   {
     name: '午餐',
-    date: '2019.4.23',
+    date: '2019/4/23',
     amount: '60',
     categoryId: '4',
   },
   {
     name: '晚餐',
-    date: '2019.4.23',
+    date: '2019/4/23',
     amount: '60',
     categoryId: '4',
   },
   {
     name: '捷運',
-    date: '2019.4.23',
+    date: '2019/4/23',
     amount: '120',
     categoryId: '2',
   },
   {
     name: '電影:驚奇隊長',
-    date: '2019.4.23',
+    date: '2019/4/23',
     amount: '220',
     categoryId: '3',
   },
   {
     name: '租金',
-    date: '2015.4.01',
+    date: '2015/4/01',
     amount: '25000',
     categoryId: '1',
   },

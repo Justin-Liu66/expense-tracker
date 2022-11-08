@@ -9,14 +9,17 @@ router.get('/', (req, res) => {
     .lean()
     .sort({ _id: 'asc' })
     .then(records => {
-      //計算總金額(該用戶支出的所有項目)
+
       let totalAmount = 0
       records.forEach(record => {
+        // 計算總金額(該用戶支出的所有項目)
         totalAmount += record.amount
-      }) 
+        //將日期轉換為yyyy/mm/dd
+        record.date = record.date.toLocaleDateString()
+      })
       res.render('index', { records, totalAmount })
-    } 
-      )
+    }
+    )
     .catch(err => console.log(err))
 })
 
