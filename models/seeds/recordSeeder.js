@@ -89,7 +89,7 @@ db.once('open', () => {
     })
   )
     .then(() => {
-      console.log('recordSeeder done!')
+      console.log('recordSeeder is done!')
       process.exit()
     })
     .catch(err => console.log(err))

@@ -14,19 +14,20 @@ const categoryData = [
   { id: 5, name: '其他' }
 ]
 
-db.on(err, () => {
+db.on('error', () => {
   console.log('mongodb error')
 })
 
 db.once('open', () => {
-  Promise.all(
-    categoryData.forEach(category => {
-      Category.create(category)
+  return Promise.all(
+    categoryData.map(category => { //為何forEach不行?
+      return Category.create(category)
     })
   )
   .then(() => {
     console.log('categoryseeder is done')
     process.exit()
   })
+  .catch(err => console.log('error'))
 
 })
