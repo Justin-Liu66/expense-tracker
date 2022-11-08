@@ -3,15 +3,15 @@
 <form class="d-flex flex-column align-items-start mt-5" action="/records" method="POST">
 
   <div class="mt-2">
-    <h5 style="display: inline; color: green">名稱:</h5>
-    <input type="text" placeholder="name" name="name" style="display: inline; border-radius: 10px">
+    <label for="name" style="color: green">名稱:</label>
+    <input type="text" id="name" placeholder="name" name="name" style="border-radius: 10px">
   </div>
   <div class="mt-2">
-    <h5 style="display: inline; color: green">日期:</h5>
-    <input type="text" placeholder="date" name="date" style="display: inline; border-radius: 10px">
+    <label for="date" style="color: green">日期:</label>
+    <input type="date" id="date" placeholder="date" name="date" style="border-radius: 10px">
   </div>
   <div class="mt-2">
-    <h5 style="display: inline; color: green">類別:</h5>
+    <label for="categoryId" style="color: green">類別:</label>
     <select name="categoryId" id="categoryId">
       <option disabled selected>請點選</option>
       <option value="1">家居物業</option>
@@ -22,8 +22,8 @@
     </select>
   </div>
   <div class="mt-2">
-    <h5 style="display: inline; color: green">金額:</h5>
-    <input type="text" placeholder="amount" name="amount" style="display: inline; border-radius: 10px">
+    <label for="amount" style="color: green">金額:</label>
+    <input type="text" id="amount" placeholder="amount" name="amount" style="border-radius: 10px">
   </div>
 
   <button class="btn btn-success mt-3" type="submit">新增支出</button>
