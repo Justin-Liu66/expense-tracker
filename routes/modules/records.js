@@ -73,19 +73,22 @@ router.delete('/:id', (req, res) => {
     .catch(err => console.log(err))
 })
 
-//按種類查看消費記錄
+// 按種類查看消費記錄
 router.get('/category', (req, res) => {
   const userId = req.user._id
   const { categoryId } = req.query
-  //從資料庫找出屬於"該使用者"且符合"指定類別"的消費資料
+  // 從資料庫找出屬於"該使用者"且符合"指定類別"的消費資料
   Record.find({ userId, categoryId })
     .lean()
     .sort({ _id: 'asc' })
     .then(records => {
-      //計算總金額(該使用者在該"指定類別"中所支出的金額)
+
       let totalAmount = 0
       records.forEach(record => {
+        // 計算總金額(該使用者在該"指定類別"中所支出的金額)
         totalAmount += record.amount
+        // 將日期轉換為yyyy/mm/dd
+        record.date = record.date.toLocaleDateString()
       })
       res.render('index', { records, totalAmount })
     }
