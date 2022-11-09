@@ -4,17 +4,19 @@
 
   <div class="mt-2">
     <label for="name" style="color: green">名稱:</h5>
-      <input type="text" id="name" placeholder="name" name="name" style="border-radius: 10px" value="{{ record.name }}">
+      <input type="text" id="name" placeholder="name" name="name" style="border-radius: 10px" value="{{ record.name }}"
+        required>
   </div>
 
   <div class="mt-2">
     <label for="date" style="color: green">日期:</label>
-    <input type="date" id="date" placeholder="date" name="date" style="border-radius: 10px" value="{{ record.date }}">
+    <input type="date" id="date" placeholder="date" name="date" style="border-radius: 10px" value="{{ record.date }}"
+      required>
   </div>
 
   <div class="mt-2">
     <label for="categoryId" style="color: green">類別:</label>
-    <select name="categoryId" id="categoryId">
+    <select name="categoryId" id="categoryId" required>
       <option disabled selected>請點選</option>
       <option value="1">家居物業</option>
       <option value="2">交通出行</option>
@@ -27,7 +29,7 @@
   <div class="mt-2">
     <label for="amount" style="color: green">金額:</label>
     <input type="text" id="amount" placeholder="amount" name="amount" style="border-radius: 10px"
-      value="{{ record.amount }}">
+      value="{{ record.amount }}" required>
   </div>
 
   <button class="btn btn-success mt-3" type="submit">送出</button>
